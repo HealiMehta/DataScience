@@ -1,0 +1,10 @@
+<h1>Results for "{{ query }}"</h1>
+<ul>
+{% for hit in hits %}
+  <li>
+    <a href="/lyrics/{{ hit.id }}">{{ hit.title }}</a> ({{ hit.year }}) by {{ hit.artist }} [Rank: {{ hit.rank }}]<br>
+    <small>{{ hit.snippet|safe }}</small>
+  </li>
+{% endfor %}
+</ul>
+<a href="/">Back to Search</a>

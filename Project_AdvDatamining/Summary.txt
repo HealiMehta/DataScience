@@ -1,0 +1,55 @@
+PART A:
+
+Upload the folder Project_PartA to your directory on the cs department server.
+
+You can now access it from : https://userweb.cs.txstate.edu/~YourNETID/Project_PartA/index.html
+
+PART B:
+
+It works on a local machine, follow the following steps:
+
+Download elasticsearch from https://www.elastic.co/downloads/elasticsearch
+
+On the command prompt, navigate to the bin folder in the downloaded package.
+for example, for me it is cd C:\xampp\htdocs\elasticsearch-9.0.0-windows-x86_64\elasticsearch-9.0.0\bin, now type the following command:
+
+elasticsearch.bat
+
+Note that your username and password will be displayed here, you will need it to log in.
+
+Open another command prompt
+
+Navigate to where Project folder is. Then type:
+
+python index_lyrics.py
+
+pip install flask
+
+python app.py
+
+
+Now you can access the application woth your username and password from here:
+
+http://localhost:5000/
+
+
+
+
+
+Implementation Overview:
+------------------------
+For this project, I built a lyrics search engine using Python, Flask, and Elasticsearch. The provided dataset, lyrics.csv, contains 50 years of pop music lyrics, with each song as a document including rank, title, year, artist, and lyrics. I used a Python script (index_lyrics.py) to parse the CSV and index each song into Elasticsearch, defining appropriate mappings for text and numeric fields.
+
+The search interface is implemented as a Flask web app (app.py) with three main HTML templates:
+- search.html: A simple search form.
+- results.html: Displays search results with title, artist, year, rank, and a KWIC-style snippet generated using Elasticsearch’s highlight feature.
+- lyrics.html: Shows the full lyrics when a user clicks on a song title.
+
+The web app connects to Elasticsearch using the official Python client with HTTPS and authentication enabled (as required by Elasticsearch 8+). I handled SSL warnings and encoding issues for CSV import.
+
+Observations:
+-------------
+- Elasticsearch’s built-in highlighter made it easy to generate keyword-in-context snippets for search results, which greatly improved usability.
+- The security features in recent Elasticsearch versions (HTTPS, authentication) required extra attention, especially for local development.
+- Encoding mismatches in the CSV file (not UTF-8) caused initial import errors, which I fixed by using 'latin1' encoding.
+- The search interface is responsive and returns relevant results quickly, even for multi-word queries.
